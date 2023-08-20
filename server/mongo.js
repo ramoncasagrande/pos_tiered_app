@@ -4,5 +4,7 @@ const uri =
 const client = new MongoClient(uri);
 client.connect((_) => {
     const collection = client.db('teste').collection('devices');
-    collection.insertOne({ greeting: 'Hello Mongo' }, () => client.close());
+    collection
+        .findOne({ greeting: 'Hello Mongo' })
+        .then((document) => console.log(document.greeting));
 });
